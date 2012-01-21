@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Think]]></title>
-  <link href="http://blog.asif.in/atom.xml" rel="self"/>
+  <title><![CDATA[Category: quotes | Think]]></title>
+  <link href="http://blog.asif.in/blog/categories/quotes/atom.xml" rel="self"/>
   <link href="http://blog.asif.in/"/>
   <updated>2012-01-21T11:10:56-05:00</updated>
   <id>http://blog.asif.in/</id>
@@ -18,13 +18,13 @@
     <link href="http://blog.asif.in/blog/2012/01/21/do/"/>
     <updated>2012-01-21T10:57:00-05:00</updated>
     <id>http://blog.asif.in/blog/2012/01/21/do</id>
-    <content type="html"><![CDATA[<p>&#8220;Keep moving.&#8221;</p>
+    <content type="html"><![CDATA[<p>"Keep moving."</p>
 
-<p>&#8220;Finish your work.&#8221;</p>
+<p>"Finish your work."</p>
 
-<p>&#8220;Well done is better than well said.&#8221;</p>
+<p>"Well done is better than well said."</p>
 
-<p>Source: <a href="http://wolfslittlestore.be/ethos/">Wolf&#8217;s little store</a></p>
+<p>Source: <a href="http://wolfslittlestore.be/ethos/">Wolf's little store</a></p>
 ]]></content>
   </entry>
   
