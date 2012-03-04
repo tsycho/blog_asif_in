@@ -4,7 +4,7 @@
   <title><![CDATA[Think]]></title>
   <link href="http://blog.asif.in/atom.xml" rel="self"/>
   <link href="http://blog.asif.in/"/>
-  <updated>2012-01-21T11:17:22-05:00</updated>
+  <updated>2012-03-03T23:34:24-05:00</updated>
   <id>http://blog.asif.in/</id>
   <author>
     <name><![CDATA[Asif Sheikh]]></name>
@@ -12,6 +12,108 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Google OAuth and Rails]]></title>
+    <link href="http://blog.asif.in/blog/2012/03/03/google-oauth-and-rails/"/>
+    <updated>2012-03-03T21:04:00-05:00</updated>
+    <id>http://blog.asif.in/blog/2012/03/03/google-oauth-and-rails</id>
+    <content type="html"><![CDATA[<p>While building <a href="http://www.inboxslasher.com">InboxSlasher</a>, I needed to enable users to give me access to their Gmail accounts via OAuth. The <a href="http://github.com/nfo/gmail_xoauth">gmail_xoauth</a> gem helped me do what I needed once the authentication was set up, but referred to <a href="http://code.google.com/p/google-mail-xoauth-tools/wiki/XoauthDotPyRunThrough">Google&#8217;s python code</a> for generating the actual OAuth tokens. Since I obviously couldn&#8217;t use that from within my Rails app, I translated the Python code to Ruby as shown below.</p>
+
+<p>Note: The Readme on Github for <a href="http://github.com/nfo/gmail_xoauth">gmail_xoauth</a> now has a link to some Sinatra code for the OAuth token generation. I haven&#8217;t checked it out. However, anyone implementing my solution should probably do so. Also, please let me know if that is an easier or better solution, and I will update this post.</p>
+
+<p>Here&#8217;s the code for the OAuth token generator. This is also saved as a <a href="https://gist.github.com/1970639">gist</a>.</p>
+
+<script src="https://gist.github.com/1970639.js?file=ruby_oauth_token_generator.rb"></script>
+
+
+<h3>How to use this</h3>
+
+<p>1) Save the above into a file that is accessible to your Rails controllers.</p>
+
+<p>2) From the controller where you want to initiate the token generation request (UsersController in my case), call the generate_request_token() method. Save the oauth_token and oauth_token_secret from above into the User&#8217;s model, and redirect the user to oauth_request_url.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">oauth_request_url</span><span class="p">,</span> <span class="n">oauth_token</span><span class="p">,</span> <span class="n">oauth_token_secret</span> <span class="o">=</span> <span class="n">generate_request_token</span><span class="p">()</span>
+</span><span class='line'><span class="c1"># save oauth_token and oauth_token_secret to @user</span>
+</span><span class='line'><span class="n">redirect_to</span> <span class="n">oauth_request_url</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>3) Once the user has given your app permission (or refused to do so), Google will send a POST to the callback url that was specified above (see line #56). Modify the following code appropriately to handle the callback.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">OauthController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">authenticate</span>
+</span><span class='line'>      <span class="n">oauth_token</span> <span class="o">=</span> <span class="n">params</span><span class="o">[</span><span class="ss">:oauth_token</span><span class="o">]</span>
+</span><span class='line'>      <span class="n">oauth_verifier</span> <span class="o">=</span> <span class="n">params</span><span class="o">[</span><span class="ss">:oauth_verifier</span><span class="o">]</span>
+</span><span class='line'>      
+</span><span class='line'>      <span class="vi">@user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">find_by_oauth_token</span><span class="p">(</span><span class="n">oauth_token</span><span class="p">)</span>
+</span><span class='line'>      <span class="k">if</span> <span class="o">!</span><span class="vi">@user</span>
+</span><span class='line'>          <span class="c1"># Do something appropriate, such as a 404</span>
+</span><span class='line'>      <span class="k">else</span>
+</span><span class='line'>          <span class="k">begin</span>
+</span><span class='line'>              <span class="n">oauth_tokens</span> <span class="o">=</span> <span class="n">get_access_token</span><span class="p">(</span><span class="n">oauth_token</span><span class="p">,</span> <span class="vi">@user</span><span class="o">.</span><span class="n">oauth_token_secret</span><span class="p">,</span> <span class="n">oauth_verifier</span><span class="p">)</span>
+</span><span class='line'>              <span class="c1"># Update @user, save oauth_tokens in the database (in a secure way)</span>
+</span><span class='line'>          <span class="k">rescue</span> <span class="no">Exception</span> <span class="o">=&gt;</span> <span class="n">e</span>
+</span><span class='line'>              <span class="c1"># Something went wrong, or user did not give you permissions on Gmail</span>
+</span><span class='line'>              <span class="c1"># Do something appropriate, potentially try again?</span>
+</span><span class='line'>              <span class="n">flash</span><span class="o">[</span><span class="ss">:error</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&quot;There was an error while authenticating with Gmail. Please try again.&quot;</span>
+</span><span class='line'>          <span class="k">end</span>          
+</span><span class='line'>          <span class="n">redirect_to</span> <span class="n">root_url</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>  
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If everything above worked fine, you should now have the user&#8217;s oauth_token and oauth_token_secret for Gmail. Use the <a href="http://github.com/nfo/gmail_xoauth">gmail_xoauth</a> gem for the rest of your work.</p>
+
+<h3>Notes:</h3>
+
+<ol>
+<li>I used &#8216;anonymous&#8217; for the consumer token and secret. If you have a consumer token and secret from Google, you should use that instead.</li>
+<li>If you need access to more Google services and not just Gmail, add them to params[&#8216;scope&#8217;] on line #58.</li>
+<li>I had to define my own method for URL escaping since CGI.escape was converting spaces into &#8216;+&#8217; instead of &#8216;%20&#8217;, which was causing me problems. I am not sure what is the right approach here.</li>
+</ol>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Steal this idea - #1 - ]]></title>
+    <link href="http://blog.asif.in/blog/2012/03/03/steal-this-idea-number-1/"/>
+    <updated>2012-03-03T19:29:00-05:00</updated>
+    <id>http://blog.asif.in/blog/2012/03/03/steal-this-idea-number-1</id>
+    <content type="html"><![CDATA[<p>I keep coming up with ideas for projects/apps/startups, and I keep noting them down with full intention of building them some day. But over time, I have realized that I will probably never have time to get to most of them. Hence, I am going to start posting them here, in the hope that someone else will build them. So go ahead and steal this idea :)</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Do]]></title>

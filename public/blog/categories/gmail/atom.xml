@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: gmail | Think]]></title>
+  <link href="http://blog.asif.in/blog/categories/gmail/atom.xml" rel="self"/>
+  <link href="http://blog.asif.in/"/>
+  <updated>2012-03-03T23:34:24-05:00</updated>
+  <id>http://blog.asif.in/</id>
+  <author>
+    <name><![CDATA[Asif Sheikh]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Google OAuth and Rails]]></title>
+    <link href="http://blog.asif.in/blog/2012/03/03/google-oauth-and-rails/"/>
+    <updated>2012-03-03T21:04:00-05:00</updated>
+    <id>http://blog.asif.in/blog/2012/03/03/google-oauth-and-rails</id>
+    <content type="html"><![CDATA[<p>While building <a href="http://www.inboxslasher.com">InboxSlasher</a>, I needed to enable users to give me access to their Gmail accounts via OAuth. The <a href="http://github.com/nfo/gmail_xoauth">gmail_xoauth</a> gem helped me do what I needed once the authentication was set up, but referred to <a href="http://code.google.com/p/google-mail-xoauth-tools/wiki/XoauthDotPyRunThrough">Google's python code</a> for generating the actual OAuth tokens. Since I obviously couldn't use that from within my Rails app, I translated the Python code to Ruby as shown below.</p>
+
+<p>Note: The Readme on Github for <a href="http://github.com/nfo/gmail_xoauth">gmail_xoauth</a> now has a link to some Sinatra code for the OAuth token generation. I haven't checked it out. However, anyone implementing my solution should probably do so. Also, please let me know if that is an easier or better solution, and I will update this post.</p>
+
+<p>Here's the code for the OAuth token generator. This is also saved as a <a href="https://gist.github.com/1970639">gist</a>.</p>
+
+<script src="https://gist.github.com/1970639.js?file=ruby_oauth_token_generator.rb"></script>
+
+
+<h3>How to use this</h3>
+
+<p>1) Save the above into a file that is accessible to your Rails controllers.</p>
+
+<p>2) From the controller where you want to initiate the token generation request (UsersController in my case), call the generate_request_token() method. Save the oauth_token and oauth_token_secret from above into the User's model, and redirect the user to oauth_request_url.
+``` ruby
+oauth_request_url, oauth_token, oauth_token_secret = generate_request_token()</p>
+
+<h1>save oauth_token and oauth_token_secret to @user</h1>
+
+<p>redirect_to oauth_request_url
+<code>
+3) Once the user has given your app permission (or refused to do so), Google will send a POST to the callback url that was specified above (see line #56). Modify the following code appropriately to handle the callback.
+</code> ruby
+class OauthController &lt; ApplicationController</p>
+
+<pre><code>def authenticate
+    oauth_token = params[:oauth_token]
+    oauth_verifier = params[:oauth_verifier]
+
+    @user = User.find_by_oauth_token(oauth_token)
+    if !@user
+        # Do something appropriate, such as a 404
+    else
+        begin
+            oauth_tokens = get_access_token(oauth_token, @user.oauth_token_secret, oauth_verifier)
+            # Update @user, save oauth_tokens in the database (in a secure way)
+        rescue Exception =&gt; e
+            # Something went wrong, or user did not give you permissions on Gmail
+            # Do something appropriate, potentially try again?
+            flash[:error] = "There was an error while authenticating with Gmail. Please try again."
+        end         
+        redirect_to root_url
+    end
+end
+</code></pre>
+
+<p>end
+```</p>
+
+<p>If everything above worked fine, you should now have the user's oauth_token and oauth_token_secret for Gmail. Use the <a href="http://github.com/nfo/gmail_xoauth">gmail_xoauth</a> gem for the rest of your work.</p>
+
+<h3>Notes:</h3>
+
+<ol>
+<li>I used 'anonymous' for the consumer token and secret. If you have a consumer token and secret from Google, you should use that instead.</li>
+<li>If you need access to more Google services and not just Gmail, add them to params['scope'] on line #58.</li>
+<li>I had to define my own method for URL escaping since CGI.escape was converting spaces into '+' instead of '%20', which was causing me problems. I am not sure what is the right approach here.</li>
+</ol>
+
+]]></content>
+  </entry>
+  
+</feed>

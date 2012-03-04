@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: ideas | Think]]></title>
+  <link href="http://blog.asif.in/blog/categories/ideas/atom.xml" rel="self"/>
+  <link href="http://blog.asif.in/"/>
+  <updated>2012-03-03T23:34:24-05:00</updated>
+  <id>http://blog.asif.in/</id>
+  <author>
+    <name><![CDATA[Asif Sheikh]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Steal this idea - #1 - ]]></title>
+    <link href="http://blog.asif.in/blog/2012/03/03/steal-this-idea-number-1/"/>
+    <updated>2012-03-03T19:29:00-05:00</updated>
+    <id>http://blog.asif.in/blog/2012/03/03/steal-this-idea-number-1</id>
+    <content type="html"><![CDATA[<p>I keep coming up with ideas for projects/apps/startups, and I keep noting them down with full intention of building them some day. But over time, I have realized that I will probably never have time to get to most of them. Hence, I am going to start posting them here, in the hope that someone else will build them. So go ahead and steal this idea :)</p>
+]]></content>
+  </entry>
+  
+</feed>
