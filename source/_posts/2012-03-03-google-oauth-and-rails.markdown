@@ -56,4 +56,4 @@ If everything above worked fine, you should now have the user's oauth_token and 
 1. I used 'anonymous' for the consumer token and secret. If you have a consumer token and secret from Google, you should use that instead.
 2. If you need access to more Google services and not just Gmail, add them to params['scope'] on line #58.
 3. I had to define my own method for URL escaping since CGI.escape was converting spaces into '+' instead of '%20', which was causing me problems. I am not sure what is the right approach here.
-
+4. I have not find a way to specify the email address of the user when requesting the oauth token. The above methodology asks the user for permission to whichever Google account they are currently signed in on their browser, which in some cases (such as if a user gave you an email address they want to use, but are signed in as a different one), can be a problem. Google's permission page does allow the user to log out and back in as the desired user, but people might not notice that. If someone knows a way to specifying the email account during the token generation, please let me know about it.
