@@ -4,7 +4,7 @@
   <title><![CDATA[Think]]></title>
   <link href="http://blog.asif.in/atom.xml" rel="self"/>
   <link href="http://blog.asif.in/"/>
-  <updated>2012-03-03T23:45:02-05:00</updated>
+  <updated>2012-03-04T00:29:59-05:00</updated>
   <id>http://blog.asif.in/</id>
   <author>
     <name><![CDATA[Asif Sheikh]]></name>
@@ -103,6 +103,20 @@
 <li>I had to define my own method for URL escaping since CGI.escape was converting spaces into &#8216;+&#8217; instead of &#8216;%20&#8217;, which was causing me problems. I am not sure what is the right approach here.</li>
 </ol>
 
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Gentleman's game]]></title>
+    <link href="http://blog.asif.in/blog/2012/02/24/gentlemans-game/"/>
+    <updated>2012-02-24T00:21:00-05:00</updated>
+    <id>http://blog.asif.in/blog/2012/02/24/gentlemans-game</id>
+    <content type="html"><![CDATA[<p>From the <a href="http://news.ycombinator.com/item?id=3587730">Hacker News discussion</a> of an excellent <a href="http://www.realdanlyons.com/blog/2012/02/13/hit-men-click-whores-and-paid-apologists-welcome-to-the-silicon-cesspool/">article</a> by Dan Lyons a.k.a. Fake Steve&#8230;</p>
+
+<p>&#8220;A game can be a gentleman&#8217;s game, but only if we all agree to play it like gentlemen.
+There are days we can&#8217;t even disagree like gentlemen here. :-(&#8221;</p>
+
+<p>by <a href="http://news.ycombinator.com/item?id=3588163">rbanffy</a></p>
 ]]></content>
   </entry>
   

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: quotes | Think]]></title>
-  <link href="http://blog.asif.in/blog/categories/quotes/atom.xml" rel="self"/>
+  <title><![CDATA[Category: startups | Think]]></title>
+  <link href="http://blog.asif.in/blog/categories/startups/atom.xml" rel="self"/>
   <link href="http://blog.asif.in/"/>
   <updated>2012-03-04T00:29:59-05:00</updated>
   <id>http://blog.asif.in/</id>
@@ -24,21 +24,6 @@
 There are days we can't even disagree like gentlemen here. :-("</p>
 
 <p>by <a href="http://news.ycombinator.com/item?id=3588163">rbanffy</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Do]]></title>
-    <link href="http://blog.asif.in/blog/2012/01/21/do/"/>
-    <updated>2012-01-21T10:57:00-05:00</updated>
-    <id>http://blog.asif.in/blog/2012/01/21/do</id>
-    <content type="html"><![CDATA[<p>"Keep moving."</p>
-
-<p>"Finish your work."</p>
-
-<p>"Well done is better than well said."</p>
-
-<p>Source: <a href="http://wolfslittlestore.be/ethos/">Wolf's little store</a></p>
 ]]></content>
   </entry>
   
