@@ -4,7 +4,7 @@
   <title><![CDATA[Think]]></title>
   <link href="http://blog.asif.in/atom.xml" rel="self"/>
   <link href="http://blog.asif.in/"/>
-  <updated>2012-03-04T10:07:53-05:00</updated>
+  <updated>2013-03-06T13:20:42-08:00</updated>
   <id>http://blog.asif.in/</id>
   <author>
     <name><![CDATA[Asif Sheikh]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Google OAuth and Rails]]></title>
     <link href="http://blog.asif.in/blog/2012/03/03/google-oauth-and-rails/"/>
-    <updated>2012-03-03T21:04:00-05:00</updated>
+    <updated>2012-03-03T21:04:00-08:00</updated>
     <id>http://blog.asif.in/blog/2012/03/03/google-oauth-and-rails</id>
     <content type="html"><![CDATA[<p>While building <a href="http://www.inboxslasher.com">InboxSlasher</a>, I needed to enable users to give me access to their Gmail accounts via OAuth. The <a href="http://github.com/nfo/gmail_xoauth">gmail_xoauth</a> gem helped me do what I needed once the authentication was set up, but referred to <a href="http://code.google.com/p/google-mail-xoauth-tools/wiki/XoauthDotPyRunThrough">Google&#8217;s python code</a> for generating the actual OAuth tokens. Since I obviously couldn&#8217;t use that from within my Rails app, I translated the Python code to Ruby as shown below.</p>
 
@@ -110,7 +110,7 @@
   <entry>
     <title type="html"><![CDATA[Gentleman's game]]></title>
     <link href="http://blog.asif.in/blog/2012/02/24/gentlemans-game/"/>
-    <updated>2012-02-24T00:21:00-05:00</updated>
+    <updated>2012-02-24T00:21:00-08:00</updated>
     <id>http://blog.asif.in/blog/2012/02/24/gentlemans-game</id>
     <content type="html"><![CDATA[<p>From the <a href="http://news.ycombinator.com/item?id=3587730">Hacker News discussion</a> of an excellent <a href="http://www.realdanlyons.com/blog/2012/02/13/hit-men-click-whores-and-paid-apologists-welcome-to-the-silicon-cesspool/">article</a> by Dan Lyons a.k.a. Fake Steve&#8230;</p>
 
@@ -124,7 +124,7 @@ There are days we can&#8217;t even disagree like gentlemen here. :-(&#8221;</p>
   <entry>
     <title type="html"><![CDATA[Do]]></title>
     <link href="http://blog.asif.in/blog/2012/01/21/do/"/>
-    <updated>2012-01-21T10:57:00-05:00</updated>
+    <updated>2012-01-21T10:57:00-08:00</updated>
     <id>http://blog.asif.in/blog/2012/01/21/do</id>
     <content type="html"><![CDATA[<p>&#8220;Keep moving.&#8221;</p>
 

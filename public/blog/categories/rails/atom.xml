@@ -4,7 +4,7 @@
   <title><![CDATA[Category: rails | Think]]></title>
   <link href="http://blog.asif.in/blog/categories/rails/atom.xml" rel="self"/>
   <link href="http://blog.asif.in/"/>
-  <updated>2012-03-04T10:07:53-05:00</updated>
+  <updated>2013-03-06T13:20:42-08:00</updated>
   <id>http://blog.asif.in/</id>
   <author>
     <name><![CDATA[Asif Sheikh]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Google OAuth and Rails]]></title>
     <link href="http://blog.asif.in/blog/2012/03/03/google-oauth-and-rails/"/>
-    <updated>2012-03-03T21:04:00-05:00</updated>
+    <updated>2012-03-03T21:04:00-08:00</updated>
     <id>http://blog.asif.in/blog/2012/03/03/google-oauth-and-rails</id>
     <content type="html"><![CDATA[<p>While building <a href="http://www.inboxslasher.com">InboxSlasher</a>, I needed to enable users to give me access to their Gmail accounts via OAuth. The <a href="http://github.com/nfo/gmail_xoauth">gmail_xoauth</a> gem helped me do what I needed once the authentication was set up, but referred to <a href="http://code.google.com/p/google-mail-xoauth-tools/wiki/XoauthDotPyRunThrough">Google's python code</a> for generating the actual OAuth tokens. Since I obviously couldn't use that from within my Rails app, I translated the Python code to Ruby as shown below.</p>
 
