@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Think</title>
+  <title>The case for buying AAPL (as of 3/5/13) - Think</title>
   <meta name="author" content="Asif Sheikh">
 
   
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blog.asif.in/">
+  <link rel="canonical" href="http://blog.asif.in/blog/2013/03/22/the-case-for-buying-aapl/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Think" type="application/atom+xml">
@@ -75,15 +75,12 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div class="blog-index">
+      <div>
+<article class="hentry" role="article">
   
-  
-  
-    <article>
-      
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/03/22/the-case-for-buying-aapl/">The Case for Buying AAPL (as of 3/5/13)</a></h1>
+      <h1 class="entry-title">The Case for Buying AAPL (as of 3/5/13)</h1>
     
     
       <p class="meta">
@@ -106,7 +103,7 @@
   </header>
 
 
-  <div class="entry-content"><p><em><strong>Disclaimers</strong>: (1) I own some AAPL stock. (2) I have no inside information on Apple, Google, Microsoft, Amazon or any other company mentioned below. (3) This blog post should NOT be considered as investment advice.</em></p>
+<div class="entry-content"><p><em><strong>Disclaimers</strong>: (1) I own some AAPL stock. (2) I have no inside information on Apple, Google, Microsoft, Amazon or any other company mentioned below. (3) This blog post should NOT be considered as investment advice.</em></p>
 
 <p><em><strong>Context</strong>: I originally wrote this in an email to a friend a few weeks back, who suggested I should widen this to a larger audience. At that time (3/5/13), AAPL was at 432. I know it has gone up since then (461 as of 3/22/13, yesterday), but I am too lazy to update the numbers below. I believe my analysis remains valid at 461 as well.</em></p>
 
@@ -144,143 +141,16 @@
 
 <p>However, as Apple continues to release strong earnings in future quarters, sentiment will reverse and there might be a big uptick. My price target for Apple is actually a P/E target, but unless something dramatic happens to change my view on the points above, I won&#8217;t consider selling Apple below a 13 P/E (ideally an after-cash-exclusion 9-10 P/E ratio).</p>
 </div>
-  
-  
 
 
-    </article>
-  
-  
-    <article>
+  <footer>
+    <p class="meta">
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/03/03/google-oauth-and-rails/">Google OAuth and Rails</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
   
 
+<span class="byline author vcard">Posted by <span class="fn">Asif Sheikh</span></span>
 
-<time datetime="2012-03-03T21:04:00-08:00" pubdate data-updated="true">Mar 3<span>rd</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>While building <a href="http://www.inboxslasher.com">InboxSlasher</a>, I needed to enable users to give me access to their Gmail accounts via OAuth. The <a href="http://github.com/nfo/gmail_xoauth">gmail_xoauth</a> gem helped me do what I needed once the authentication was set up, but referred to <a href="http://code.google.com/p/google-mail-xoauth-tools/wiki/XoauthDotPyRunThrough">Google&#8217;s python code</a> for generating the actual OAuth tokens. Since I obviously couldn&#8217;t use that from within my Rails app, I translated the Python code to Ruby as shown below.</p>
-
-<p>Note: The Readme on Github for <a href="http://github.com/nfo/gmail_xoauth">gmail_xoauth</a> now has a link to some Sinatra code for the OAuth token generation. I haven&#8217;t checked it out. However, anyone implementing my solution should probably do so. Also, please let me know if that is an easier or better solution, and I will update this post.</p>
-
-<p>Here&#8217;s the code for the OAuth token generator. This is also saved as a <a href="https://gist.github.com/1970639">gist</a>.</p>
-
-<script src="https://gist.github.com/1970639.js?file=ruby_oauth_token_generator.rb"></script>
-
-
-<h3>How to use this</h3>
-
-<p>1) Save the above into a file that is accessible to your Rails controllers.</p>
-
-<p>2) From the controller where you want to initiate the token generation request (UsersController in my case), call the generate_request_token() method. Save the oauth_token and oauth_token_secret from above into the User&#8217;s model, and redirect the user to oauth_request_url.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">oauth_request_url</span><span class="p">,</span> <span class="n">oauth_token</span><span class="p">,</span> <span class="n">oauth_token_secret</span> <span class="o">=</span> <span class="n">generate_request_token</span><span class="p">()</span>
-</span><span class='line'><span class="c1"># save oauth_token and oauth_token_secret to @user</span>
-</span><span class='line'><span class="n">redirect_to</span> <span class="n">oauth_request_url</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>3) Once the user has given your app permission (or refused to do so), Google will send a POST to the callback url that was specified above (see line #56). Modify the following code appropriately to handle the callback.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">OauthController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">authenticate</span>
-</span><span class='line'>      <span class="n">oauth_token</span> <span class="o">=</span> <span class="n">params</span><span class="o">[</span><span class="ss">:oauth_token</span><span class="o">]</span>
-</span><span class='line'>      <span class="n">oauth_verifier</span> <span class="o">=</span> <span class="n">params</span><span class="o">[</span><span class="ss">:oauth_verifier</span><span class="o">]</span>
-</span><span class='line'>      
-</span><span class='line'>      <span class="vi">@user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">find_by_oauth_token</span><span class="p">(</span><span class="n">oauth_token</span><span class="p">)</span>
-</span><span class='line'>      <span class="k">if</span> <span class="o">!</span><span class="vi">@user</span>
-</span><span class='line'>          <span class="c1"># Do something appropriate, such as a 404</span>
-</span><span class='line'>      <span class="k">else</span>
-</span><span class='line'>          <span class="k">begin</span>
-</span><span class='line'>              <span class="n">oauth_tokens</span> <span class="o">=</span> <span class="n">get_access_token</span><span class="p">(</span><span class="n">oauth_token</span><span class="p">,</span> <span class="vi">@user</span><span class="o">.</span><span class="n">oauth_token_secret</span><span class="p">,</span> <span class="n">oauth_verifier</span><span class="p">)</span>
-</span><span class='line'>              <span class="c1"># Update @user, save oauth_tokens in the database (in a secure way)</span>
-</span><span class='line'>          <span class="k">rescue</span> <span class="no">Exception</span> <span class="o">=&gt;</span> <span class="n">e</span>
-</span><span class='line'>              <span class="c1"># Something went wrong, or user did not give you permissions on Gmail</span>
-</span><span class='line'>              <span class="c1"># Do something appropriate, potentially try again?</span>
-</span><span class='line'>              <span class="n">flash</span><span class="o">[</span><span class="ss">:error</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&quot;There was an error while authenticating with Gmail. Please try again.&quot;</span>
-</span><span class='line'>          <span class="k">end</span>          
-</span><span class='line'>          <span class="n">redirect_to</span> <span class="n">root_url</span>
-</span><span class='line'>      <span class="k">end</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>  
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>If everything above worked fine, you should now have the user&#8217;s oauth_token and oauth_token_secret for Gmail. Use the <a href="http://github.com/nfo/gmail_xoauth">gmail_xoauth</a> gem for the rest of your work.</p>
-
-<h3>Notes:</h3>
-
-<ol>
-<li>I used &#8216;anonymous&#8217; for the consumer token and secret. If you have a consumer token and secret from Google, you should use that instead.</li>
-<li>If you need access to more Google services and not just Gmail, add them to params[&#8216;scope&#8217;] on line #58.</li>
-<li>I had to define my own method for URL escaping since CGI.escape was converting spaces into &#8216;+&#8217; instead of &#8216;%20&#8217;, which was causing me problems. I am not sure what is the right approach here.</li>
-<li>I have not find a way to specify the email address of the user when requesting the oauth token. The above methodology asks the user for permission to whichever Google account they are currently signed in on their browser, which in some cases (such as if a user gave you an email address they want to use, but are signed in as a different one), can be a problem. Google&#8217;s permission page does allow the user to log out and back in as the desired user, but people might not notice that. If someone knows a way to specifying the email account during the token generation, please let me know about it.</li>
-</ol>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/02/24/gentlemans-game/">Gentleman&#8217;s Game</a></h1>
-    
-    
-      <p class="meta">
-        
 
 
 
@@ -292,74 +162,38 @@
   
 
 
-<time datetime="2012-02-24T00:21:00-08:00" pubdate data-updated="true">Feb 24<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>From the <a href="http://news.ycombinator.com/item?id=3587730">Hacker News discussion</a> of an excellent <a href="http://www.realdanlyons.com/blog/2012/02/13/hit-men-click-whores-and-paid-apologists-welcome-to-the-silicon-cesspool/">article</a> by Dan Lyons a.k.a. Fake Steve&#8230;</p>
-
-<p>&#8220;A game can be a gentleman&#8217;s game, but only if we all agree to play it like gentlemen.
-There are days we can&#8217;t even disagree like gentlemen here. :-(&#8221;</p>
-
-<p>by <a href="http://news.ycombinator.com/item?id=3588163">rbanffy</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
+<time datetime="2013-03-22T00:00:00-07:00" pubdate data-updated="true">Mar 22<span>nd</span>, 2013</time>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/01/21/do/">Do</a></h1>
-    
-    
-      <p class="meta">
-        
 
-
-
-
-
-
-
-
+<span class="categories">
   
+    <a class='category' href='/blog/categories/apple/'>Apple</a>, <a class='category' href='/blog/categories/finance/'>finance,</a>
+  
+</span>
 
 
-<time datetime="2012-01-21T10:57:00-08:00" pubdate data-updated="true">Jan 21<span>st</span>, 2012</time>
-        
-      </p>
+    </p>
     
-  </header>
-
-
-  <div class="entry-content"><p>&#8220;Keep moving.&#8221;</p>
-
-<p>&#8220;Finish your work.&#8221;</p>
-
-<p>&#8220;Well done is better than well said.&#8221;</p>
-
-<p>Source: <a href="http://wolfslittlestore.be/ethos/">Wolf&#8217;s little store</a></p>
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog.asif.in/blog/2013/03/22/the-case-for-buying-aapl/" data-via="" data-counturl="http://blog.asif.in/blog/2013/03/22/the-case-for-buying-aapl/" >Tweet</a>
+  
+  
+  
 </div>
-  
-  
 
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/03/03/google-oauth-and-rails/" title="Previous Post: Google OAuth and Rails">&laquo; Google OAuth and Rails</a>
+      
+      
+    </p>
+  </footer>
+</article>
 
-    </article>
-  
-  <div class="pagination">
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
 </div>
+
 <aside class="sidebar">
   
     <section>
@@ -375,7 +209,7 @@ There are days we can&#8217;t even disagree like gentlemen here. :-(&#8221;</p>
       </li>
     
       <li class="post">
-        <a href="/blog/2012/02/24/gentlemans-game/">Gentleman&#8217;s game</a>
+        <a href="/blog/2012/02/24/gentlemans-game/">Gentleman's game</a>
       </li>
     
       <li class="post">
@@ -392,6 +226,7 @@ There are days we can&#8217;t even disagree like gentlemen here. :-(&#8221;</p>
 
   
 </aside>
+
 
     </div>
   </div>
